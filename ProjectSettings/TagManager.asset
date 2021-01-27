@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Spaceship Engine
+    uniqueID: 3190509289
+    locked: 0
+  - name: Spaceship Engine Flame
+    uniqueID: 3108573791
+    locked: 0
+  - name: Spaceship
+    uniqueID: 3182065187
+    locked: 0

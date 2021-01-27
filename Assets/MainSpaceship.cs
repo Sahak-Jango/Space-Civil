@@ -28,34 +28,6 @@ public class MainSpaceship : MonoBehaviour
 
         void Move()
         {
-            /*Quaternion rot = transform.rotation;
-
-            float z = rot.eulerAngles.z;
-            z += Input.GetAxis("Horizontal") * rotateMaxSpeed * Time.deltaTime;
-
-            rot = Quaternion.Euler(0, 0, z);
-
-            transform.rotation = rot;
-
-            Vector3 velocity = new Vector3(0, Input.GetAxis("Vertical") * Time.deltaTime * maxSpeed, 0);
-
-            Vector3 position = transform.position;
-
-            position += rot * velocity;
-
-            if(Mathf.Abs(position.y) + shipBoundaryRadius > Camera.main.orthographicSize)
-            {
-                if(position.y > 0)
-                {
-                    position.y = Camera.main.orthographicSize - shipBoundaryRadius;
-                }
-                else
-                {
-                    position.y = -Camera.main.orthographicSize + shipBoundaryRadius;
-                }
-            }
-
-            */
 
             transform.rotation = MovementIncline();
 
