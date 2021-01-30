@@ -67,14 +67,12 @@ public class MainSpaceship : MonoBehaviour
         {
             Quaternion rotation = transform.rotation;
 
-            float euler_z = rotation.eulerAngles.z;
-
-            Debug.Log(euler_z);
+            float z_deg = rotation.eulerAngles.z;
             
             if(Mathf.Abs(Input.GetAxis("Horizontal")) != 0)
             {
-                euler_z -= Input.GetAxis("Horizontal") * rotateMaxSpeed * Time.deltaTime;
-                rotation = InclineBoundaries(euler_z);
+                z_deg -= Input.GetAxis("Horizontal") * rotateMaxSpeed * Time.deltaTime;
+                rotation = InclineBoundaries(z_deg);
             }
             else
             {
@@ -84,18 +82,18 @@ public class MainSpaceship : MonoBehaviour
             return rotation;
         }
 
-        Quaternion InclineBoundaries(float euler_z)
+        Quaternion InclineBoundaries(float z_deg)
         {
-            if(euler_z >= MAX_Z_ROT && euler_z < 90f)
+            if(z_deg >= MAX_Z_ROT && z_deg < 90f)
             {
-                euler_z = MAX_Z_ROT;
+                z_deg = MAX_Z_ROT;
             }
-            else if(euler_z <= 360f -MAX_Z_ROT && euler_z > 270f)
+            else if(z_deg <= 360f -MAX_Z_ROT && z_deg > 270f)
             {
-                euler_z = 360f - MAX_Z_ROT;
+                z_deg = 360f - MAX_Z_ROT;
             }
 
-            return Quaternion.Euler(0, 0, euler_z);
+            return Quaternion.Euler(0, 0, z_deg);
         }
     }
 }
