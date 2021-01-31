@@ -1,71 +1,128 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainSpaceship : MonoBehaviour
+namespace SpaceCivil.Controllers
 {
-    Rigidbody2D rb;
-    [SerializeField]
-    float maxSpeed = 3f;
-    [SerializeField]
-    float rotateMaxSpeed = 180f;
-    [SerializeField]
-    float shipBoundaryRadius = 0.5f;
-
-    void Start()
+public class MainSpaceship : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
+        const float MAX_Z_ROT = 5f;
 
-    void Update()
-    {
-        Move();
-    }
+        Rigidbody2D rb;
+        [SerializeField]
+        float maxSpeed;
+        [SerializeField]
+        float rotateMaxSpeed;
+        [SerializeField]
+        float shipBoundaryRadius;
+        [SerializeField]
+        float shootingDelay;
+        [SerializeField]
+        float shootingClock = 0f;
+        [SerializeField]
+        Transform leftWeapon;
+        [SerializeField]
+        Transform rightWeapon;
 
-    void Move()
-    {
-        Quaternion rot = transform.rotation;
+        [SerializeField]
+        GameObject projectilePrefab;
 
-        float z = rot.eulerAngles.z;
-        z += Input.GetAxis("Horizontal") * rotateMaxSpeed * Time.deltaTime;
-
-        rot = Quaternion.Euler(0, 0, z);
-
-        transform.rotation = rot;
-
-        Vector3 velocity = new Vector3(0, Input.GetAxis("Vertical") * Time.deltaTime * maxSpeed, 0);
-
-        Vector3 position = transform.position;
-
-        position += rot * velocity;
-
-        if(Mathf.Abs(position.y) + shipBoundaryRadius > Camera.main.orthographicSize)
+        void Start()
         {
-            if(position.y > 0)
+            rb = GetComponent<Rigidbody2D>();
+        }
+
+        void Update()
+        {
+            Move();
+            Shoot();
+        }
+
+        #region Movement
+
+        void Move()
+        {
+
+            transform.rotation = MovementIncline();
+
+            Vector3 velocity = new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * maxSpeed, 0 , 0);
+
+            Vector3 position = transform.position;
+
+            position += velocity;
+
+            position = MovementBoundaries(position);
+
+            transform.position = position;
+
+        }
+
+        Vector3 MovementBoundaries(Vector3 position)
+        {
+            float screenRatio = (float) Screen.width / (float) Screen.height;
+            float widthOrtho = Camera.main.orthographicSize * screenRatio;
+
+            if(Mathf.Abs(position.x) + shipBoundaryRadius > widthOrtho)
             {
-                position.y = Camera.main.orthographicSize - shipBoundaryRadius;
+                if(position.x > 0)
+                {
+                    position.x = widthOrtho - shipBoundaryRadius;
+                }
+                else
+                {
+                    position.x = -widthOrtho + shipBoundaryRadius;
+                }
+            }
+
+            return position;
+        }
+
+        Quaternion MovementIncline()
+        {
+            Quaternion rotation = transform.rotation;
+
+            float z_deg = rotation.eulerAngles.z;
+            
+            if(Mathf.Abs(Input.GetAxis("Horizontal")) != 0)
+            {
+                z_deg -= Input.GetAxis("Horizontal") * rotateMaxSpeed * Time.deltaTime;
+                rotation = InclineBoundaries(z_deg);
             }
             else
             {
-                position.y = -Camera.main.orthographicSize + shipBoundaryRadius;
+                rotation = Quaternion.Lerp(rotation, Quaternion.Euler(0f, 0f, 0f), 1.0f * Time.deltaTime * (rotateMaxSpeed / 5f));
             }
+
+            return rotation;
         }
 
-        float screenRatio = (float) Screen.width / (float) Screen.height;
-        float widthOrtho = Camera.main.orthographicSize * screenRatio;
-
-        if(Mathf.Abs(position.x) + shipBoundaryRadius > widthOrtho)
+        Quaternion InclineBoundaries(float z_deg)
         {
-            if(position.x > 0)
+            if(z_deg >= MAX_Z_ROT && z_deg < 90f)
             {
-                position.x = widthOrtho - shipBoundaryRadius;
+                z_deg = MAX_Z_ROT;
             }
-            else
+            else if(z_deg <= 360f -MAX_Z_ROT && z_deg > 270f)
             {
-                position.x = -widthOrtho + shipBoundaryRadius;
+                z_deg = 360f - MAX_Z_ROT;
+            }
+
+            return Quaternion.Euler(0, 0, z_deg);
+        }
+
+        #endregion
+
+        void Shoot()
+        {
+            shootingClock -= Time.deltaTime;
+
+            if(Input.GetButton("Fire1") && shootingClock <= 0f)
+            {
+                shootingClock = shootingDelay;
+                Instantiate(projectilePrefab, leftWeapon.position, leftWeapon.rotation);
+                Instantiate(projectilePrefab, rightWeapon.position, rightWeapon.rotation);
             }
         }
 
-        transform.position = position;
     }
 }
