@@ -45,6 +45,9 @@ TagManager:
   - name: Background
     uniqueID: 918620007
     locked: 0
+  - name: Projectile
+    uniqueID: 1163507035
+    locked: 0
   - name: Spaceship Engine
     uniqueID: 3190509289
     locked: 0

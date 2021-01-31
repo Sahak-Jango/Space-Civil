@@ -29,8 +29,12 @@ namespace SpaceCivil.Controllers
 
         void SetOrthographicSize()
         {
-            float ortho_size = spr_renderer.bounds.size.x * Screen.height / Screen.width * 0.5f;
-            Camera.main.orthographicSize = ortho_size;
+            float screenRatio = (float) Screen.width / (float) Screen.height;
+            float bgrRatio = spr_renderer.bounds.size.x / spr_renderer.bounds.size.y;
+
+            float orthoSize = spr_renderer.bounds.size.y / 2f;
+
+            Camera.main.orthographicSize = (screenRatio >= bgrRatio) ? orthoSize : (orthoSize * (bgrRatio / screenRatio));
         }
     }
 }

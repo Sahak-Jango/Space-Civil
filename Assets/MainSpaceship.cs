@@ -10,11 +10,22 @@ public class MainSpaceship : MonoBehaviour
 
         Rigidbody2D rb;
         [SerializeField]
-        float maxSpeed = 3f;
+        float maxSpeed;
         [SerializeField]
-        float rotateMaxSpeed = 180f;
+        float rotateMaxSpeed;
         [SerializeField]
-        float shipBoundaryRadius = 0.5f;
+        float shipBoundaryRadius;
+        [SerializeField]
+        float shootingDelay;
+        [SerializeField]
+        float shootingClock = 0f;
+        [SerializeField]
+        Transform leftWeapon;
+        [SerializeField]
+        Transform rightWeapon;
+
+        [SerializeField]
+        GameObject projectilePrefab;
 
         void Start()
         {
@@ -24,7 +35,10 @@ public class MainSpaceship : MonoBehaviour
         void Update()
         {
             Move();
+            Shoot();
         }
+
+        #region Movement
 
         void Move()
         {
@@ -95,5 +109,20 @@ public class MainSpaceship : MonoBehaviour
 
             return Quaternion.Euler(0, 0, z_deg);
         }
+
+        #endregion
+
+        void Shoot()
+        {
+            shootingClock -= Time.deltaTime;
+
+            if(Input.GetButton("Fire1") && shootingClock <= 0f)
+            {
+                shootingClock = shootingDelay;
+                Instantiate(projectilePrefab, leftWeapon.position, leftWeapon.rotation);
+                Instantiate(projectilePrefab, rightWeapon.position, rightWeapon.rotation);
+            }
+        }
+
     }
 }
