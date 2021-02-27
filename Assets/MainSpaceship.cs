@@ -45,9 +45,9 @@ public class MainSpaceship : MonoBehaviour
 
             transform.rotation = MovementIncline();
 
-            Vector3 velocity = new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * maxSpeed, 0 , 0);
+            var velocity = new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * maxSpeed, 0f , 0f);
 
-            Vector3 position = transform.position;
+            var position = transform.position;
 
             position += velocity;
 
@@ -59,7 +59,7 @@ public class MainSpaceship : MonoBehaviour
 
         Vector3 MovementBoundaries(Vector3 position)
         {
-            float screenRatio = (float) Screen.width / (float) Screen.height;
+            var screenRatio = (float) Screen.width / (float) Screen.height;
             float widthOrtho = Camera.main.orthographicSize * screenRatio;
 
             if(Mathf.Abs(position.x) + shipBoundaryRadius > widthOrtho)
@@ -79,7 +79,7 @@ public class MainSpaceship : MonoBehaviour
 
         Quaternion MovementIncline()
         {
-            Quaternion rotation = transform.rotation;
+            var rotation = transform.rotation;
 
             float z_deg = rotation.eulerAngles.z;
             
