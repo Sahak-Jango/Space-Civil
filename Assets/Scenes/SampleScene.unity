@@ -134,9 +134,10 @@ GameObject:
   - component: {fileID: 138644486}
   - component: {fileID: 138644485}
   - component: {fileID: 138644487}
+  - component: {fileID: 138644488}
   m_Layer: 0
   m_Name: Spaceship_Main
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,10 +227,25 @@ MonoBehaviour:
   shipBoundaryRadius: 2.2
   shootingDelay: 0.85
   shootingClock: 0
-  leftWeapon: {fileID: 733352003}
-  rightWeapon: {fileID: 684514119}
   projectilePrefab: {fileID: 7073842661402836488, guid: f24920c9165dbcd4da50bf360ca76a04,
     type: 3}
+  leftWeapon: {fileID: 733352003}
+  rightWeapon: {fileID: 684514119}
+  healthValue: 0
+--- !u!136 &138644488
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138644484}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.6666667
+  m_Height: 1.3333334
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &162405415
 GameObject:
   m_ObjectHideFlags: 0
@@ -5178,7 +5194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de58b032b29ede4096664b4c8751759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsVisibleOnScreen: 0
+  isVisibleOnScreen: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -10678,7 +10694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de58b032b29ede4096664b4c8751759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsVisibleOnScreen: 0
+  isVisibleOnScreen: 0
 --- !u!1 &1423677402
 GameObject:
   m_ObjectHideFlags: 0
@@ -10774,7 +10790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de58b032b29ede4096664b4c8751759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsVisibleOnScreen: 0
+  isVisibleOnScreen: 0
 --- !u!1 &1512349938
 GameObject:
   m_ObjectHideFlags: 0
@@ -20512,7 +20528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de58b032b29ede4096664b4c8751759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsVisibleOnScreen: 0
+  isVisibleOnScreen: 0
 --- !u!1 &1642837855
 GameObject:
   m_ObjectHideFlags: 0
@@ -20634,7 +20650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 897ace0e82002c448aa1ec9228e12fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  background_set: []
 --- !u!4 &1820938297
 Transform:
   m_ObjectHideFlags: 0
@@ -20833,7 +20848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de58b032b29ede4096664b4c8751759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsVisibleOnScreen: 0
+  isVisibleOnScreen: 0
 --- !u!1 &1958312740
 GameObject:
   m_ObjectHideFlags: 0
@@ -20929,7 +20944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de58b032b29ede4096664b4c8751759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsVisibleOnScreen: 0
+  isVisibleOnScreen: 0
 --- !u!1 &2031570584
 GameObject:
   m_ObjectHideFlags: 0
@@ -25899,7 +25914,7 @@ PrefabInstance:
     - target: {fileID: 1270105924854162126, guid: 5ba57ce812adef342b18ad6bb1b455e0,
         type: 3}
       propertyPath: spawnTime
-      value: 4
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1270105924854162127, guid: 5ba57ce812adef342b18ad6bb1b455e0,
         type: 3}

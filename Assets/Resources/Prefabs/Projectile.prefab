@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7073842661402836490}
   - component: {fileID: 7073842661402836491}
   - component: {fileID: 2883169360658715014}
+  - component: {fileID: 5285584675630497323}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -4827,3 +4828,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 40
   lifeTime: 5
+  damage: 100
+--- !u!65 &5285584675630497323
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7073842661402836488}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 0.15, z: 10.1}
+  m_Center: {x: 0, y: 0, z: 4}
